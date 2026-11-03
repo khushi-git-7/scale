@@ -1,0 +1,12 @@
+name: prettier-diff
+on: push
+jobs:
+  diff:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npx --yes prettier@2.8.8 --write packages/components/src/components/dropdown-select/dropdown-select.css packages/components/src/components/dropdown-select/dropdown-select.tsx packages/components/src/components/dropdown-select/dropdown-select.spec.ts
+      - run: git diff
